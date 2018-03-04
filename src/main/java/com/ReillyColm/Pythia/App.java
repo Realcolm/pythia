@@ -4,6 +4,7 @@ import	java.io.IOException;
 import	java.util.Arrays;
 import	java.util.Date;
 import	java.util.Scanner;
+
 import	org.apache.logging.log4j.Level;
 import	org.apache.logging.log4j.LogManager;
 import	org.apache.logging.log4j.Logger;
@@ -11,6 +12,7 @@ import	org.apache.logging.log4j.core.config.Configurator;
 import	joptsimple.OptionException;
 import	joptsimple.OptionParser;
 import	joptsimple.OptionSet;
+
 import	java.sql.Connection;
 import	java.sql.DriverManager;
 import	java.sql.ResultSet;
@@ -58,7 +60,7 @@ public	class App
 				//The	URL	and	name of	the	SQLite	database
 				//	TODO:	Remove	database	location	and	name	hard	coding	and	pass	in	as	a	parameter	in	the	next	version
 				
-				private String	databaseFile = "jdbc:sqlite:database/oreallyoreilly.db";
+				private String	databaseFile = "jdbc:sqlite:‪C:/_DEV/Pythia/database/oreallyoreilly.db";
 				
 				//	CONSTRUCTORS
 				//............................................................
