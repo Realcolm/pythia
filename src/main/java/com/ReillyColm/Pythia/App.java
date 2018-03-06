@@ -60,7 +60,7 @@ public	class App
 				//The	URL	and	name of	the	SQLite	database
 				//	TODO:	Remove	database	location	and	name	hard	coding	and	pass	in	as	a	parameter	in	the	next	version
 				
-				private String	databaseFile = "jdbc:sqlite:‪C:/_DEV/Pythia/database/oreallyoreilly.db";
+				private String	databaseFile = "jdbc:sqlite:C://_DEV/Pythia/database/oreallyoreilly.db";
 				
 				//	CONSTRUCTORS
 				//............................................................
