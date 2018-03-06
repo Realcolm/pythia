@@ -1,5 +1,6 @@
 package com.ReillyColm.Pythia.Menu;
 
-public interface IExecutable {
-
+public interface IExecuatable {
+	
+	public void execute();
 }
