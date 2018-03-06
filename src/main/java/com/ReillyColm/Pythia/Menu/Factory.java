@@ -1,5 +1,160 @@
 package com.ReillyColm.Pythia.Menu;
 
-public class Factory {
+import	java.lang.reflect.Constructor;
+import	java.lang.reflect.InvocationTargetException;
 
+
+public	class	Factory	{
+				
+				private static	Factory	theFactory			=	null;
+				//	CONSTRUCTORS
+				//............................................................
+				
+				private	Factory(){}
+				
+				//	METHODS	
+				//............................................................
+				
+				public static	Factory	getFactory()
+				{
+								if	(	theFactory	==	null)
+								{
+										theFactory	=	new	Factory();
+								}
+								return	theFactory;
+				}
+				
+				public static void	removeFactory()
+				{
+								if	(	theFactory	!=	null)
+										theFactory	=	null;
+				}	
+								
+				/**
+					*	return	an	object	of	a	class	which	has	no	parameters
+					**/
+				public Object	getObject(String	className)	throws	FactoryException
+				{
+								Object[]	parameters	=	new Object[0];
+								String[]	parameterNames	=	new String[0];
+								return	createObject(className,	parameters,	parameterNames);
+				}
+				
+				/**
+					*	return	an	object	of	a	class	which	has	one	parameter
+					**/
+				public Object	getObject(	String	className,
+																															Object	parameter,
+																															String	parameterName)
+				throws	FactoryException
+				{
+												Object[]	parameters	=	new Object[1];										//	array	of	size	1
+												parameters[0]	=	parameter;																				//	init	first	element
+												String[]	parameterNames	=	new String[1];
+												parameterNames[0]	=	parameterName;
+												return	createObject(className,	parameters,	parameterNames);
+				}
+				/**
+					*	return	an	object	of	a	class	which	has	more	than	one	parameter
+					**/
+				public Object	getObject(	String	className,
+																															Object[]	parameters,
+																															String[]	parameterNames)
+				throws	FactoryException
+				{
+												return	createObject(className,	parameters,	parameterNames);
+				}
+		/**
+			*	create	an	object	of	the	class	provides	constructed	with	the	parameters
+			*	provided
+			*
+			*	@params	className
+			*	Must	supply	the	fully	qualified	classname	ie.	"jermuck.factory.BasicFactory"	or
+			*	"java.lang.Thread"	for	the	class	you	wish	to	instanciate
+			*
+			*	@params	parameters
+			*	an	object	array	of	the	actual	parameter	objects	to	be	used	by	the	constructor	of
+			*	of	the	class.	The	parameters	are	all	in	the	form	of	Object	classes
+			*
+			*	@params	parameterClassNames
+			*	a	string	array	with	the	corresponding	class	names	of	the	parameters	contained
+			*	in	the	parameters	object	array.	This	is	required	for	searching	for	the	right
+			*	constructor	and	casting	the	objects	back	to	their	correct	class	type	before
+			*	executing	the	constructor
+			*
+			**/
+			public Object	createObject(	String	className,
+																														Object[]	parameters,
+																														String[]	parameterClassNames	)
+			throws	FactoryException
+			{
+								int	x	=	0;									//	counters
+								Class	theClass;				//	represents	a	classes	and	interfaces	in	a	running	java	application
+								//	see	if	class	exists	and	can	be	initialised
+								
+								try
+								{
+												theClass	=	Class.forName(className);				//causes	the	class	to	be	initilised
+								}
+								catch	(ClassNotFoundException	e)
+								{
+												throw new	FactoryException(e);
+								}
+								//	provides	information	about,	and	access	to,	a	single	constructor	for	a	class.
+								Constructor	con;			
+														
+								//	Find	the	class	types	of	the	parameters	so	the	right	constructor	can	be	used
+								//	1.	create	an	array	of	Class	objects	equal	to	the	parameters	array	size
+								//	2.	loop	through	the	parameters	class	names	and	initialise	instances	of
+								//				their	classes
+								Class[]	classParams	=	new	Class[parameters.length];
+								try
+								{
+												for	(x	=	0;	x	<	parameters.length;	x++)
+												{
+																classParams[x]	=	Class.forName(parameterClassNames[x]);
+												}
+								}
+								catch	(ClassNotFoundException	e)
+								{
+												throw new	FactoryException(e);
+								}
+								//	look	for	a	constructor	matching	the	parameter	signature
+								try
+								{
+												con	=	theClass.getConstructor(classParams);
+								}
+								catch	(NoSuchMethodException	e)
+								{
+												throw new	FactoryException(e);
+								}
+								catch	(SecurityException	e)
+								{
+												throw new	FactoryException(e);
+								}
+								//	instanciate	the	object	using	the	constructor
+								try
+								{
+												return	(Object)con.newInstance(parameters);
+								}
+								catch	(InstantiationException	e)
+								{
+												throw new	FactoryException(e);
+								}
+								catch	(IllegalAccessException	e)
+								{
+												throw new	FactoryException(e);
+								}
+								catch	(IllegalArgumentException	e)
+								{
+												throw new	FactoryException(e);
+								}
+								catch	(InvocationTargetException	e)
+								{
+												e.getTargetException().getMessage();
+												e.getTargetException().printStackTrace();
+												throw new	FactoryException(e);
+								}
+								
+				}//EOM
 }
