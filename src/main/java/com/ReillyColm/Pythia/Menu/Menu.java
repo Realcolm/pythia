@@ -58,7 +58,7 @@ public class Menu extends MenuWidget {
 				{
 								ConsoleControls.clearConsole();
 								int	exitMenu	=	0;
-								IExecuatable	exe;
+								IExecutable	exe;
 								
 								do	{
 												
@@ -106,7 +106,7 @@ public class Menu extends MenuWidget {
 																				try
 																				{
 																								Object	obj		=	f.getObject(		menuOfExecutors.get(this.selection)	);
-																								exe	=	(IExecuatable)	obj;
+																								exe	=	(IExecutable)	obj;
 																								exe.execute();
 																				}
 																				catch	(	FactoryException	fe)
