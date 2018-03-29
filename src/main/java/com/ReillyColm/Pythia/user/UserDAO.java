@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.ReillyColm.pythia.data.IDataManager;
+import com.ReillyColm.Pythia.Data.IDataManager;
 
 public class UserDAO implements IUserDAO {
 

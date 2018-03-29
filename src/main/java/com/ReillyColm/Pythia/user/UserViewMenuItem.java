@@ -1,7 +1,7 @@
 package com.ReillyColm.Pythia.user;
 
-import com.ReillyColm.Pythia.data.DataManagerSQLite;
-import com.ReillyColm.pythia.menu.IExecutable;
+import com.ReillyColm.Pythia.Data.DataManagerSQLite;
+import com.ReillyColm.Pythia.Menu.IExecutable;
 
 public class UserViewMenuItem implements IExecutable {
 
